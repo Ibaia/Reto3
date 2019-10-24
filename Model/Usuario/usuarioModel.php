@@ -1,5 +1,6 @@
 <?php
-include_once ("C:\Users\ikaslea\Desktop\PHP\Reto 3\Model\connect_data.php");
+//include_once ("C:\Users\ikaslea/eclipse-workspace\Reto3\Model\connect_data.php");
+include_once ($_SERVER['DOCUMENT_ROOT']."/Reto3/Model/connect_data.php");
 include_once("usuarioClass.php");
 
 class usuarioModel extends usuarioClass{
@@ -85,7 +86,7 @@ class usuarioModel extends usuarioClass{
         
         $this->CloseConnect();
     }
-	/*
+	
 	//Delete Usuarios
    	public function delete(){
         
@@ -112,26 +113,29 @@ class usuarioModel extends usuarioClass{
         
         $this->OpenConnect();  // konexio zabaldu  - abrir conexión
         
-        
+        $idUpdate=$this->getIdUsuario();
         $nombreUpdate=$this->getNombre();
 		$contraseniaUpdate=$this->getContrasenia();
 		$nickNameUpdate=$this->getNickName();
 		$residenciaUpdate=$this->getResidencia();
 		$emailUpdate=$this->getEmail();
-		$numTelUpdate=$this->getNumTel();
+		
 
-        $sql="CALL spUpdateUser('$nombreUpdate','$contraseniaUpdate','$nickNameUpdate','$residenciaUpdate','$emailUpdate',$numTelUpdate)";
+        $sql="CALL spUpdateUser('$idUpdate','$nombreUpdate','$contraseniaUpdate','$nickNameUpdate','$residenciaUpdate','$emailUpdate')";
         
         $numFilas=$this->link->query($sql);
         
         if ($numFilas>=1){
-            return "insertado";
+            return "cambiado";
         } else {
-            return "Error al insertar";
+            return "Error al cambiar".$sql.print_r($numFilas,true);
         }
         
         $this->CloseConnect();
-    }*/
+    }
+   
+    
+    
     function getListJsonString() {//if Class attributes PROTECTED
         
         // returns the list of objects in a srting with JSON format
