@@ -4,7 +4,7 @@ $(document).ready(function(){
 	    var contrasenia = document.getElementById("contrasenia").value;
 	   
 	    if((email=="") || (contrasenia=="")){
-	    	alert("Rellena los campos");
+	    	
 	    }else{
 	    	
 	    	$.ajax({
