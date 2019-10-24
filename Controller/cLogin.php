@@ -1,28 +1,26 @@
 <?php
-include_once ("../Model/Usuario/usuarioModel.php");
 
-$email = $_POST["email"];
-//
-$sql = "SELECT * FROM usuarios WHERE email LIKE '$email'";
+if(isset($_POST['login'])){
+    $connection = new mysqli('localhost','root','','reto3');
 
-$result = //EXECUTE SQL
-
-$erantzuna = array();
-$erantzuna["existe"] = false;
-
-
-if($_POST["pass"] == $result["pass"]){
-    $erantzuna["existe"] = true;
+    $email = $connection->real_escape_string($_POST['emailPHP']);
+    $contrasenia =$connection->real_escape_string($_POST['contraseniaPHP']);
     
+    $data = $connection->query("SELECT id FROM usuarios WHERE email='$email' AND contrasenia='$contrasenia'");
+    
+    if($data->num_rows>0){
+       
+        exit("correct");
+        echo ("correct");
+        //header('Location: ../View/pago.html');
+        
+    }else{
+        exit("failed");
+        echo ("failed");
+       
+    }
+    
+
 }
-
-
-if($email == "admin@gmail.com")
-    $erantzuna["mota"] = "admin";
-else
-    $erantzuna["mota"] = "user";
-        
-        
-echo json_encode($erantzuna)
 
 ?>
